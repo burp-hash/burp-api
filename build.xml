@@ -1,0 +1,43 @@
+<project name="burp-api build" basedir="." default="build.jar">
+    <property name="build.dir" value="build"/>
+    <property name="src.dir" value="src"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="dist.jar" value="${dist.dir}/burp-api.jar"/>
+    
+    <target name="init" description="Create Directories">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${src.dir}"/>
+    </target>
+
+    <target name="clean" depends="init" description="Clean Build Dir">
+        <delete>
+            <fileset dir="${build.dir}"/>
+        </delete>
+    </target>
+    
+    <target name="distclean" depends="clean" description="Remove Jar">
+        <delete>
+            <fileset dir="${dist.dir}"/>
+        </delete>
+    </target>
+
+    <target name="build" depends="clean" description="Build project">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false"/>
+    </target>
+    
+    <target name="build.jar" depends="build" description="Build JAR file">
+        <delete>
+            <fileset dir="${dist.dir}"/>
+        </delete>
+        <copy todir="${build.dir}">
+            <fileset dir="${src.dir}"/>
+        </copy>
+        <tstamp/>
+        <jar destfile="${dist.jar}" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Build-Date" value="${TODAY}"/>
+            </manifest>
+        </jar>
+    </target>
+</project>
