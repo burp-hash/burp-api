@@ -4,4 +4,4 @@ The [Burp Suite](https://portswigger.net/burp/) API is distributed as a set of .
 
 The aim of this project was to create a repeatable process for packaging the Burp API files into a JAR for use in developement and compilation of Burp extensions. Simply place this JAR in your IDE's or compiler's classpath.
 
-For **downloads**, see: [https://github.com/burp-hash/burp-api/releases/](https://github.com/burp-hash/burp-api/releases/)
+For **downloads**, see: [https://github.com/burp-hash/burp-api/releases/latest](https://github.com/burp-hash/burp-api/releases/latest)
