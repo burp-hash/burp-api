@@ -17,6 +17,15 @@ package burp;
 public interface IIntruderPayloadGeneratorFactory
 {
     /**
+     * This method is used by Burp to obtain the name of the payload generator.
+     * This will be displayed as an option within the Intruder UI when the user
+     * selects to use extension-generated payloads.
+     *
+     * @return The name of the payload generator.
+     */
+    String getGeneratorName();
+
+    /**
      * This method is used by Burp when the user starts an Intruder attack that
      * uses this payload generator.
      *
@@ -28,13 +37,4 @@ public interface IIntruderPayloadGeneratorFactory
      * payloads for the attack.
      */
     IIntruderPayloadGenerator createNewInstance(IIntruderAttack attack);
-
-    /**
-     * This method is used by Burp to obtain the name of the payload generator.
-     * This will be displayed as an option within the Intruder UI when the user
-     * selects to use extension-generated payloads.
-     *
-     * @return The name of the payload generator.
-     */
-    String getGeneratorName();
 }

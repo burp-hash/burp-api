@@ -20,22 +20,6 @@ import java.awt.Component;
 public interface IMessageEditorTab
 {
     /**
-     * This method returns the currently displayed message.
-     *
-     * @return The currently displayed message.
-     */
-    byte[] getMessage();
-
-    /**
-     * This method is used to retrieve the data that is currently selected by
-     * the user.
-     *
-     * @return The data that is currently selected by the user. This may be
-     * <code>null</code> if no selection is currently made.
-     */
-    byte[] getSelectedData();
-
-    /**
      * This method returns the caption that should appear on the custom tab when
      * it is displayed. <b>Note:</b> Burp invokes this method once when the tab
      * is first generated, and the same caption will be used every time the tab
@@ -62,7 +46,8 @@ public interface IMessageEditorTab
      * message, so that the custom tab can indicate whether it should be enabled
      * for that message.
      *
-     * @param content The message that is about to be displayed.
+     * @param content The message that is about to be displayed, or a zero-length
+     * array if the existing message is to be cleared.
      * @param isRequest Indicates whether the message is a request or a
      * response.
      * @return The method should return
@@ -71,19 +56,6 @@ public interface IMessageEditorTab
      * will be hidden while this message is displayed.
      */
     boolean isEnabled(byte[] content, boolean isRequest);
-
-    /**
-     * This method is used to determine whether the currently displayed message
-     * has been modified by the user. The hosting editor will always call
-     * <code>getMessage()</code> before calling this method, so any pending
-     * edits should be completed within
-     * <code>getMessage()</code>.
-     *
-     * @return The method should return
-     * <code>true</code> if the user has modified the current message since it
-     * was first displayed.
-     */
-    boolean isModified();
 
     /**
      * The hosting editor will invoke this method to display a new message or to
@@ -99,4 +71,33 @@ public interface IMessageEditorTab
      * response.
      */
     void setMessage(byte[] content, boolean isRequest);
+
+    /**
+     * This method returns the currently displayed message.
+     *
+     * @return The currently displayed message.
+     */
+    byte[] getMessage();
+
+    /**
+     * This method is used to determine whether the currently displayed message
+     * has been modified by the user. The hosting editor will always call
+     * <code>getMessage()</code> before calling this method, so any pending
+     * edits should be completed within
+     * <code>getMessage()</code>.
+     *
+     * @return The method should return
+     * <code>true</code> if the user has modified the current message since it
+     * was first displayed.
+     */
+    boolean isModified();
+
+    /**
+     * This method is used to retrieve the data that is currently selected by
+     * the user.
+     *
+     * @return The data that is currently selected by the user. This may be
+     * <code>null</code> if no selection is currently made.
+     */
+    byte[] getSelectedData();
 }

@@ -20,12 +20,47 @@ package burp;
 public interface IHttpRequestResponse
 {
     /**
+     * This method is used to retrieve the request message.
+     *
+     * @return The request message.
+     */
+    byte[] getRequest();
+
+    /**
+     * This method is used to update the request message.
+     *
+     * @param message The new request message.
+     */
+    void setRequest(byte[] message);
+
+    /**
+     * This method is used to retrieve the response message.
+     *
+     * @return The response message.
+     */
+    byte[] getResponse();
+
+    /**
+     * This method is used to update the response message.
+     *
+     * @param message The new response message.
+     */
+    void setResponse(byte[] message);
+
+    /**
      * This method is used to retrieve the user-annotated comment for this item,
      * if applicable.
      *
      * @return The user-annotated comment for this item, or null if none is set.
      */
     String getComment();
+
+    /**
+     * This method is used to update the user-annotated comment for this item.
+     *
+     * @param comment The comment to be assigned to this item.
+     */
+    void setComment(String comment);
 
     /**
      * This method is used to retrieve the user-annotated highlight for this
@@ -37,36 +72,6 @@ public interface IHttpRequestResponse
     String getHighlight();
 
     /**
-     * This method is used to retrieve the HTTP service for this request /
-     * response.
-     *
-     * @return An
-     * <code>IHttpService</code> object containing details of the HTTP service.
-     */
-    IHttpService getHttpService();
-
-    /**
-     * This method is used to retrieve the request message.
-     *
-     * @return The request message.
-     */
-    byte[] getRequest();
-
-    /**
-     * This method is used to retrieve the response message.
-     *
-     * @return The response message.
-     */
-    byte[] getResponse();
-
-    /**
-     * This method is used to update the user-annotated comment for this item.
-     *
-     * @param comment The comment to be assigned to this item.
-     */
-    void setComment(String comment);
-
-    /**
      * This method is used to update the user-annotated highlight for this item.
      *
      * @param color The highlight color to be assigned to this item. Accepted
@@ -74,6 +79,15 @@ public interface IHttpRequestResponse
      * or a null String to clear any existing highlight.
      */
     void setHighlight(String color);
+
+    /**
+     * This method is used to retrieve the HTTP service for this request /
+     * response.
+     *
+     * @return An
+     * <code>IHttpService</code> object containing details of the HTTP service.
+     */
+    IHttpService getHttpService();
 
     /**
      * This method is used to update the HTTP service for this request /
@@ -84,19 +98,5 @@ public interface IHttpRequestResponse
      * service.
      */
     void setHttpService(IHttpService httpService);
-
-    /**
-     * This method is used to update the request message.
-     *
-     * @param message The new request message.
-     */
-    void setRequest(byte[] message);
-
-    /**
-     * This method is used to update the response message.
-     *
-     * @param message The new response message.
-     */
-    void setResponse(byte[] message);
 
 }

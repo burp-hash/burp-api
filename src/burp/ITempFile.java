@@ -18,16 +18,16 @@ package burp;
 public interface ITempFile
 {
     /**
-     * This method is deprecated and no longer performs any action.
-     */
-    @Deprecated
-    void delete();
-
-    /**
      * This method is used to retrieve the contents of the buffer that was saved
      * in the temporary file.
      *
      * @return The contents of the buffer that was saved in the temporary file.
      */
     byte[] getBuffer();
+
+    /**
+     * This method is deprecated and no longer performs any action.
+     */
+    @Deprecated
+    void delete();
 }

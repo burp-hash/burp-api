@@ -28,23 +28,20 @@ public interface ITextEditor
     Component getComponent();
 
     /**
-     * This method is used to obtain the currently selected text.
+     * This method is used to control whether the editor is currently editable.
+     * This status can be toggled on and off as required.
      *
-     * @return The currently selected text, or
-     * <code>null</code> if the user has not made any selection.
+     * @param editable Indicates whether the editor should be currently
+     * editable.
      */
-    byte[] getSelectedText();
+    void setEditable(boolean editable);
 
     /**
-     * This method can be used to retrieve the bounds of the user's selection
-     * into the displayed text, if applicable.
+     * This method is used to update the currently displayed text in the editor.
      *
-     * @return An int[2] array containing the start and end offsets of the
-     * user's selection within the displayed text. If the user has not made any
-     * selection in the current message, both offsets indicate the position of
-     * the caret within the editor.
+     * @param text The text to be displayed.
      */
-    int[] getSelectionBounds();
+    void setText(byte[] text);
 
     /**
      * This method is used to retrieve the currently displayed text.
@@ -64,13 +61,23 @@ public interface ITextEditor
     boolean isTextModified();
 
     /**
-     * This method is used to control whether the editor is currently editable.
-     * This status can be toggled on and off as required.
+     * This method is used to obtain the currently selected text.
      *
-     * @param editable Indicates whether the editor should be currently
-     * editable.
+     * @return The currently selected text, or
+     * <code>null</code> if the user has not made any selection.
      */
-    void setEditable(boolean editable);
+    byte[] getSelectedText();
+
+    /**
+     * This method can be used to retrieve the bounds of the user's selection
+     * into the displayed text, if applicable.
+     *
+     * @return An int[2] array containing the start and end offsets of the
+     * user's selection within the displayed text. If the user has not made any
+     * selection in the current message, both offsets indicate the position of
+     * the caret within the editor.
+     */
+    int[] getSelectionBounds();
 
     /**
      * This method is used to update the search expression that is shown in the
@@ -80,11 +87,4 @@ public interface ITextEditor
      * @param expression The search expression.
      */
     void setSearchExpression(String expression);
-
-    /**
-     * This method is used to update the currently displayed text in the editor.
-     *
-     * @param text The text to be displayed.
-     */
-    void setText(byte[] text);
 }

@@ -15,6 +15,10 @@ package burp;
 public interface IParameter
 {
     /**
+     * Used to indicate a parameter within the URL query string.
+     */
+    static final byte PARAM_URL = 0;
+    /**
      * Used to indicate a parameter within the message body.
      */
     static final byte PARAM_BODY = 1;
@@ -23,19 +27,6 @@ public interface IParameter
      */
     static final byte PARAM_COOKIE = 2;
     /**
-     * Used to indicate an item of data within a JSON structure.
-     */
-    static final byte PARAM_JSON = 6;
-    /**
-     * Used to indicate the value of a parameter attribute within a multi-part
-     * message body (such as the name of an uploaded file).
-     */
-    static final byte PARAM_MULTIPART_ATTR = 5;
-    /**
-     * Used to indicate a parameter within the URL query string.
-     */
-    static final byte PARAM_URL = 0;
-    /**
      * Used to indicate an item of data within an XML structure.
      */
     static final byte PARAM_XML = 3;
@@ -43,6 +34,23 @@ public interface IParameter
      * Used to indicate the value of a tag attribute within an XML structure.
      */
     static final byte PARAM_XML_ATTR = 4;
+    /**
+     * Used to indicate the value of a parameter attribute within a multi-part
+     * message body (such as the name of an uploaded file).
+     */
+    static final byte PARAM_MULTIPART_ATTR = 5;
+    /**
+     * Used to indicate an item of data within a JSON structure.
+     */
+    static final byte PARAM_JSON = 6;
+
+    /**
+     * This method is used to retrieve the parameter type.
+     *
+     * @return The parameter type. The available types are defined within this
+     * interface.
+     */
+    byte getType();
 
     /**
      * This method is used to retrieve the parameter name.
@@ -52,13 +60,11 @@ public interface IParameter
     String getName();
 
     /**
-     * This method is used to retrieve the end offset of the parameter name
-     * within the HTTP request.
+     * This method is used to retrieve the parameter value.
      *
-     * @return The end offset of the parameter name within the HTTP request, or
-     * -1 if the parameter is not associated with a specific request.
+     * @return The parameter value.
      */
-    int getNameEnd();
+    String getValue();
 
     /**
      * This method is used to retrieve the start offset of the parameter name
@@ -70,28 +76,13 @@ public interface IParameter
     int getNameStart();
 
     /**
-     * This method is used to retrieve the parameter type.
-     *
-     * @return The parameter type. The available types are defined within this
-     * interface.
-     */
-    byte getType();
-
-    /**
-     * This method is used to retrieve the parameter value.
-     *
-     * @return The parameter value.
-     */
-    String getValue();
-
-    /**
-     * This method is used to retrieve the end offset of the parameter value
+     * This method is used to retrieve the end offset of the parameter name
      * within the HTTP request.
      *
-     * @return The end offset of the parameter value within the HTTP request, or
+     * @return The end offset of the parameter name within the HTTP request, or
      * -1 if the parameter is not associated with a specific request.
      */
-    int getValueEnd();
+    int getNameEnd();
 
     /**
      * This method is used to retrieve the start offset of the parameter value
@@ -101,4 +92,13 @@ public interface IParameter
      * or -1 if the parameter is not associated with a specific request.
      */
     int getValueStart();
+
+    /**
+     * This method is used to retrieve the end offset of the parameter value
+     * within the HTTP request.
+     *
+     * @return The end offset of the parameter value within the HTTP request, or
+     * -1 if the parameter is not associated with a specific request.
+     */
+    int getValueEnd();
 }

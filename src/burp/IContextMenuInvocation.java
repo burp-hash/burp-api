@@ -21,16 +21,6 @@ import java.awt.event.InputEvent;
 public interface IContextMenuInvocation
 {
     /**
-     * Used to indicate that the context menu is being invoked in an Intruder
-     * attack results.
-     */
-    static final byte CONTEXT_INTRUDER_ATTACK_RESULTS = 9;
-    /**
-     * Used to indicate that the context menu is being invoked in the Intruder
-     * payload positions editor.
-     */
-    static final byte CONTEXT_INTRUDER_PAYLOAD_POSITIONS = 8;
-    /**
      * Used to indicate that the context menu is being invoked in a request
      * editor.
      */
@@ -51,6 +41,16 @@ public interface IContextMenuInvocation
      */
     static final byte CONTEXT_MESSAGE_VIEWER_RESPONSE = 3;
     /**
+     * Used to indicate that the context menu is being invoked in the Target
+     * site map tree.
+     */
+    static final byte CONTEXT_TARGET_SITE_MAP_TREE = 4;
+    /**
+     * Used to indicate that the context menu is being invoked in the Target
+     * site map table.
+     */
+    static final byte CONTEXT_TARGET_SITE_MAP_TABLE = 5;
+    /**
      * Used to indicate that the context menu is being invoked in the Proxy
      * history.
      */
@@ -61,20 +61,20 @@ public interface IContextMenuInvocation
      */
     static final byte CONTEXT_SCANNER_RESULTS = 7;
     /**
+     * Used to indicate that the context menu is being invoked in the Intruder
+     * payload positions editor.
+     */
+    static final byte CONTEXT_INTRUDER_PAYLOAD_POSITIONS = 8;
+    /**
+     * Used to indicate that the context menu is being invoked in an Intruder
+     * attack results.
+     */
+    static final byte CONTEXT_INTRUDER_ATTACK_RESULTS = 9;
+    /**
      * Used to indicate that the context menu is being invoked in a search
      * results window.
      */
     static final byte CONTEXT_SEARCH_RESULTS = 10;
-    /**
-     * Used to indicate that the context menu is being invoked in the Target
-     * site map table.
-     */
-    static final byte CONTEXT_TARGET_SITE_MAP_TABLE = 5;
-    /**
-     * Used to indicate that the context menu is being invoked in the Target
-     * site map tree.
-     */
-    static final byte CONTEXT_TARGET_SITE_MAP_TREE = 4;
 
     /**
      * This method can be used to retrieve the native Java input event that was
@@ -86,6 +86,16 @@ public interface IContextMenuInvocation
     InputEvent getInputEvent();
 
     /**
+     * This method can be used to retrieve the Burp tool within which the
+     * context menu was invoked.
+     *
+     * @return A flag indicating the Burp tool within which the context menu was
+     * invoked. Burp tool flags are defined in the
+     * <code>IBurpExtenderCallbacks</code> interface.
+     */
+    int getToolFlag();
+
+    /**
      * This method can be used to retrieve the context within which the menu was
      * invoked.
      *
@@ -95,15 +105,16 @@ public interface IContextMenuInvocation
     byte getInvocationContext();
 
     /**
-     * This method can be used to retrieve details of the Scanner issues that
-     * were selected by the user when the context menu was invoked.
+     * This method can be used to retrieve the bounds of the user's selection
+     * into the current message, if applicable.
      *
-     * @return An array of <code>IScanIssue</code> objects representing the
-     * issues that were selected by the user when the context menu was invoked.
-     * This method returns <code>null</code> if no Scanner issues are applicable
-     * to the invocation.
+     * @return An int[2] array containing the start and end offsets of the
+     * user's selection in the current message. If the user has not made any
+     * selection in the current message, both offsets indicate the position of
+     * the caret within the editor. If the menu is not being invoked from a
+     * message editor, the method returns <code>null</code>.
      */
-    IScanIssue[] getSelectedIssues();
+    int[] getSelectionBounds();
 
     /**
      * This method can be used to retrieve details of the HTTP requests /
@@ -133,24 +144,13 @@ public interface IContextMenuInvocation
     IHttpRequestResponse[] getSelectedMessages();
 
     /**
-     * This method can be used to retrieve the bounds of the user's selection
-     * into the current message, if applicable.
+     * This method can be used to retrieve details of the Scanner issues that
+     * were selected by the user when the context menu was invoked.
      *
-     * @return An int[2] array containing the start and end offsets of the
-     * user's selection in the current message. If the user has not made any
-     * selection in the current message, both offsets indicate the position of
-     * the caret within the editor. If the menu is not being invoked from a
-     * message editor, the method returns <code>null</code>.
+     * @return An array of <code>IScanIssue</code> objects representing the
+     * issues that were selected by the user when the context menu was invoked.
+     * This method returns <code>null</code> if no Scanner issues are applicable
+     * to the invocation.
      */
-    int[] getSelectionBounds();
-
-    /**
-     * This method can be used to retrieve the Burp tool within which the
-     * context menu was invoked.
-     *
-     * @return A flag indicating the Burp tool within which the context menu was
-     * invoked. Burp tool flags are defined in the
-     * <code>IBurpExtenderCallbacks</code> interface.
-     */
-    int getToolFlag();
+    IScanIssue[] getSelectedIssues();
 }

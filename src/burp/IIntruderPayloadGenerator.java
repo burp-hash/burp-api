@@ -18,17 +18,6 @@ package burp;
 public interface IIntruderPayloadGenerator
 {
     /**
-     * This method is used by Burp to obtain the value of the next payload.
-     *
-     * @param baseValue The base value of the current payload position. This
-     * value may be
-     * <code>null</code> if the concept of a base value is not applicable (e.g.
-     * in a battering ram attack).
-     * @return The next payload to use in the attack.
-     */
-    byte[] getNextPayload(byte[] baseValue);
-
-    /**
      * This method is used by Burp to determine whether the payload generator is
      * able to provide any further payloads.
      *
@@ -38,6 +27,17 @@ public interface IIntruderPayloadGenerator
      * <code>true</code>.
      */
     boolean hasMorePayloads();
+
+    /**
+     * This method is used by Burp to obtain the value of the next payload.
+     *
+     * @param baseValue The base value of the current payload position. This
+     * value may be
+     * <code>null</code> if the concept of a base value is not applicable (e.g.
+     * in a battering ram attack).
+     * @return The next payload to use in the attack.
+     */
+    byte[] getNextPayload(byte[] baseValue);
 
     /**
      * This method is used by Burp to reset the state of the payload generator
